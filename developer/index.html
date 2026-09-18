@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Premier Site Manager — Interactive Preview</title><link href="premier-favicon.png" rel="icon" type="image/png"/><link href="admin.css?v=26" rel="stylesheet"/></head>
+<body><div class="preview-manager-banner">INTERACTIVE PREVIEW — changes are saved only in this browser. The purchased version uses the real private backend.</div><div class="shell">
+<aside class="sidebar">
+<div class="brand-row"><img alt="Premier" src="premier-favicon.png"/><div><strong>Premier</strong><span>Site Manager</span></div></div>
+<nav>
+<button class="active" data-view="dashboard">Overview</button>
+<button data-view="pages">Page Editor</button>
+<button data-view="requests">Requests</button>
+<button data-view="appearance">Appearance</button><button data-view="branding">Branding</button>
+<button data-view="media">Media</button>
+<button data-view="blog">Blog</button>
+<button data-view="contact">Contact</button>
+<button data-view="tools">Site Tools</button>
+<button data-view="health">Health &amp; Backup</button>
+</nav>
+<button class="site-link" id="openSite">Open Live Site ↗</button><button class="site-link reset-demo" id="resetDemo">Reset Preview Demo</button>
+</aside>
+<main class="workspace">
+<header class="topbar"><div><span class="eyebrow">Website management</span><h1 id="viewTitle">Overview</h1></div><span class="connection-pill" id="connectionPill">Not connected</span></header>
+<section class="connection-card" id="connectionCard"><div class="connection-intro"><strong>Preview access is already connected</strong><p>The preview website URL and demo key are already filled in. This shows the same connection flow the owner uses, but nothing here can change the real production site.</p></div><label>Preview website URL<input id="apiBase" placeholder="https://www.example.com"/></label><label>Demo admin key (already filled)<input id="adminKey" placeholder="Paste admin key" type="password"/></label><button class="primary" id="connectBtn">Reconnect Preview</button></section>
+<div class="status" id="status">Enter the website URL and admin key, then connect.</div>
+<section class="view active" id="dashboardView"><div class="hero-panel"><div><span class="eyebrow">Simple site control</span><h2>Manage the live website without editing code.</h2><p>Use Page Editor for any page, Appearance for global styling, Media for uploads, Requests for leads, and Blog for new posts.</p></div><div class="quick-actions"><button data-jump="pages">Edit a page</button><button data-jump="appearance">Customize design</button><button data-jump="requests">View requests</button><button data-jump="media">Manage images</button></div></div><div class="stats" id="dashboardStats"></div></section>
+<section class="view" id="pagesView"><div class="view-head"><div><h2>Page Editor</h2><p>Edit the useful content on any public page without touching code. Header/footer branding is managed under Branding.</p></div><div class="head-actions"><span class="save-state" id="pageSaveState">No page loaded</span><button id="previewPage">Preview</button><button class="primary" id="savePage">Save Page</button></div></div>
+<div class="panel page-toolbar"><label>Page<select id="pageSelect"></select></label><button id="loadPage">Load Page</button><span class="save-note">A backup is created automatically before every save.</span></div>
+<div class="empty-state" id="pageEditorEmpty">Choose a page, then click <strong>Load Page</strong>.</div>
+<div class="page-editor" hidden="" id="pageEditor">
+<div class="editor-section"><div class="section-title"><h3>Page settings</h3><p>Browser title and search description.</p></div><div class="editor-grid" id="seoFields"></div></div>
+<div class="editor-section"><div class="section-title"><h3>Text &amp; buttons</h3><p>Main-page content only, so repeated navigation/footer items do not clutter the editor.</p></div><div class="editor-grid" id="textFields"></div></div>
+<div class="editor-section"><div class="section-title"><h3>Images</h3><p>Change page photos here. Use Branding for the site-wide header/footer logos and tab icon.</p></div><div class="editor-grid" id="imageFields"></div></div>
+<div class="editor-section"><div class="section-title"><h3>Form fields</h3><p>Edit labels, placeholders, and dropdown choices.</p></div><div class="editor-grid" id="formFields"></div></div>
+<div class="page-save-bar" hidden="" id="pageSaveBar"><span>You have unsaved changes.</span><button class="primary" id="savePageBottom" type="button">Save Page</button></div><details class="advanced panel"><summary>Advanced HTML — only if needed</summary><p>Edit the complete page source. Use this only if the normal editor does not expose something you need.</p><textarea id="rawSource" rows="24" spellcheck="false"></textarea><button class="primary" id="saveRawPage">Save Advanced HTML</button></details>
+</div>
+</section>
+<section class="view" id="requestsView"><div class="view-head"><div><h2>Project requests</h2><p>Keep new leads organized from first message through completion.</p></div><button id="refreshRequests">Refresh</button></div>
+<div class="request-toolbar panel"><div aria-label="Request status filters" class="request-tabs" id="requestTabs" role="tablist"><button class="active" data-request-filter="all">All <span id="requestCountAll">0</span></button><button data-request-filter="new">New <span id="requestCountNew">0</span></button><button data-request-filter="contacted">Contacted <span id="requestCountContacted">0</span></button><button data-request-filter="finished">Finished <span id="requestCountFinished">0</span></button></div><div class="request-controls"><label>Search<input id="requestSearch" placeholder="Name, email, phone, address…" type="search"/></label><label>Sort<select id="requestSort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option></select></label></div><p class="request-toolbar-note">New inquiries appear under <strong>New</strong>. Move them to <strong>Contacted</strong> after you respond, then <strong>Finished</strong> when the job or lead is complete.</p></div>
+<div class="request-list" id="requestsList"></div></section>
+<section class="view" id="appearanceView"><div class="view-head"><div><h2>Appearance</h2><p>Safe global design controls that apply across the website.</p></div></div><form class="panel form-grid" id="appearanceForm">
+<label>Primary navy<input name="navy" type="color"/></label><label>Accent green<input name="sage" type="color"/></label><label>Page background<input name="paper" type="color"/></label><label>Main text<input name="ink" type="color"/></label><label>Cream sections<input name="cream" type="color"/></label><label>Scrolled header<input name="headerScrolled" type="color"/></label>
+<label class="full">Homepage header tint <span id="tintValue"></span><input max="0.75" min="0.05" name="headerTint" step="0.01" type="range"/></label>
+<label>Button roundness <span id="buttonRadiusValue"></span><input max="999" min="6" name="buttonRadius" step="1" type="range"/></label><label>Image/card roundness <span id="imageRadiusValue"></span><input max="36" min="0" name="imageRadius" step="1" type="range"/></label>
+<label>Section spacing <span id="sectionSpacingValue"></span><input max="120" min="56" name="sectionSpacing" step="2" type="range"/></label><label>Header logo size <span id="logoSizeValue"></span><input max="76" min="44" name="logoSize" step="1" type="range"/></label>
+<div class="header-preview full"><span>Logo</span><span>Home   Services   Projects</span><b>Request Estimate</b></div><button class="primary" type="submit">Save Appearance</button></form></section>
+<section class="view" id="brandingView">
+<div class="view-head"><div><h2>Branding</h2><p>Change the exact logos and browser icon without editing HTML.</p></div></div>
+<form class="branding-grid" id="brandingForm">
+<article class="brand-control panel">
+<div class="brand-preview light"><img alt="Header logo preview" id="headerLogoPreview"/></div>
+<div><h3>Header logo</h3><p>The logo at the far left of the navigation bar.</p></div>
+<label>Image URL<input name="headerLogo" required="" type="text"/></label>
+<label class="upload-button small">Upload replacement<input accept="image/*" id="headerLogoUpload" type="file"/></label>
+</article>
+<article class="brand-control panel">
+<div class="brand-preview dark"><img alt="Footer logo preview" id="footerLogoPreview"/></div>
+<div><h3>Footer logo</h3><p>The larger company logo at the bottom of every page.</p></div>
+<label>Image URL<input name="footerLogo" required="" type="text"/></label>
+<label class="upload-button small">Upload replacement<input accept="image/*" id="footerLogoUpload" type="file"/></label>
+</article>
+<article class="brand-control panel">
+<div class="icon-preview"><img alt="Browser icon preview" id="faviconPreview"/></div>
+<div><h3>Browser / tab icon</h3><p>Use a simple square mark with no tiny wording. PNG works best.</p></div>
+<label>Image URL<input name="favicon" required=""/></label>
+<label class="upload-button small">Upload replacement<input accept="image/png,image/webp,image/x-icon,image/svg+xml" id="faviconUpload" type="file"/></label>
+</article>
+<div class="brand-actions"><button class="primary" type="submit">Save Branding</button><button id="restoreBranding" type="button">Restore Premier Logos</button></div>
+<p class="helper-note">In this GitHub preview, branding changes are browser-only. The purchased version saves them to the real website.</p>
+</form>
+</section><section class="view" id="mediaView"><div class="view-head"><div><h2>Media Library</h2><p>Upload reusable website images and copy their URLs.</p></div><label class="upload-button">Upload image<input accept="image/*" id="mediaUpload" type="file"/></label></div><div class="media-grid" id="mediaGrid"></div></section>
+<section class="view" id="blogView"><div class="view-head"><div><h2>Blog</h2><p>Create project-journal posts without editing HTML.</p></div></div><form class="panel form-grid" id="blogForm"><label>Post title<input name="title" required=""/></label><label>Category<input name="category" value="Project Journal"/></label><label class="full">Summary<textarea name="summary" required="" rows="3"></textarea></label><label>Cover image URL<input name="imageUrl" placeholder="/assets/uploads/photo.webp" required=""/></label><label>Image description<input name="imageAlt" required=""/></label><label class="full upload-field">Or upload a cover image<input accept="image/*" id="blogUpload" type="file"/></label><label class="full">Post text<textarea name="content" placeholder="Separate paragraphs with a blank line." required="" rows="8"></textarea></label><button class="primary" type="submit">Publish Blog Post</button></form><div class="post-list" id="blogList"></div></section>
+<section class="view" id="contactView"><div class="view-head"><div><h2>Contact routing</h2><p>New inquiries are saved in the built-in Requests inbox by default.</p></div></div><form class="panel form-grid" id="settingsForm"><label>Fallback business email<input name="businessEmail" placeholder="projects@company.com" type="email"/><small>Optional. Used to open the visitor's email app only if the online inbox cannot be reached.</small></label><label>External CRM / form endpoint<input name="contactEndpoint" placeholder="https://..."/><small>Leave blank unless the company already uses an outside form/CRM service.</small></label><label class="check full"><input checked="" name="useBuiltIn" type="checkbox"/><span>Use the built-in Requests inbox (recommended)</span></label><div class="brand-actions"><button class="primary" type="submit">Save Contact Settings</button><button id="testContactSetup" type="button">Test Inquiry Setup</button></div><p class="helper-note full" id="contactSetupNote">The built-in inbox stores submissions under Requests. It does not send email notifications by itself.</p></form></section>
+<section class="view" id="toolsView"><div class="view-head"><div><h2>Site Tools</h2><p>Useful site-wide changes. A page backup is made before replacements.</p></div></div><form class="panel form-grid" id="replaceForm"><label>Find this text<input name="find" required=""/></label><label>Replace it with<input name="replace"/></label><label class="check full"><input name="caseSensitive" type="checkbox"/><span>Match capitalization exactly</span></label><button class="primary" type="submit">Replace Across All Pages</button></form></section>
+<section class="view" id="healthView"><div class="view-head"><div><h2>Health &amp; backup</h2><p>Check the live site and download a portable settings/request backup.</p></div><div class="head-actions"><button id="refreshHealth">Run Check</button><button id="downloadBackup">Download Settings Backup</button></div></div><div class="stats" id="healthGrid"></div><div class="panel health-note"><strong>Preview mode</strong><p>Health statistics are simulated for this static GitHub preview. The purchased version runs these checks against the real Node website and stored data.</p></div></section>
+</main></div><script src="preview-api.js?v=26"></script><script src="admin.js?v=26-preview"></script><script src="preview-admin.js?v=26"></script></body></html>

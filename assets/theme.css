@@ -1,0 +1,10 @@
+/* Managed by Developer Console > Appearance. */
+:root{--navy:#0e2944;--sage:#637f69;--paper:#fbfaf6;--ink:#182229;--cream:#f1eee6;--radius:22px;}
+.site-header:not(.inner){background:rgba(7,24,39,0.34)!important;border-bottom-color:rgba(255,255,255,.22)!important;}
+.site-header.inner,.site-header.scrolled{background:#f1f0eb!important;}
+.btn{border-radius:999px!important;}
+.card,.project-card,.portfolio-item,.blog-card,.article-photo,.service-panel,.areas-feature,.recognition-strip{border-radius:22px!important;}
+.section{padding-top:92px!important;padding-bottom:92px!important;}
+:root{--brand-logo-height:62px;}
+.brand img{height:var(--brand-logo-height)!important;width:auto!important;}
+@media(max-width:700px){.section{padding-top:70px!important;padding-bottom:70px!important}.brand img{height:min(58px,var(--brand-logo-height))!important}}
