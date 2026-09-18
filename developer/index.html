@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 
-<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Premier Site Manager — Interactive Preview</title><link href="premier-favicon.png" rel="icon" type="image/png"/><link href="admin.css?v=26" rel="stylesheet"/></head>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Premier Site Manager — Interactive Preview</title><link href="premier-favicon.png" rel="icon" type="image/png"/><link href="admin.css?v=27" rel="stylesheet"/></head>
 <body><div class="preview-manager-banner">INTERACTIVE PREVIEW — changes are saved only in this browser. The purchased version uses the real private backend.</div><div class="shell">
-<aside class="sidebar">
-<div class="brand-row"><img alt="Premier" src="premier-favicon.png"/><div><strong>Premier</strong><span>Site Manager</span></div></div>
+<aside class="sidebar" id="managerSidebar">
+<div class="brand-row"><img alt="Premier" src="premier-favicon.png"/><div><strong>Premier</strong><span>Site Manager</span></div><button class="manager-menu-toggle" id="managerMenuToggle" type="button" aria-expanded="false" aria-controls="managerSidebarMenu" aria-label="Open management menu"><span class="menu-label">Menu</span><span class="menu-icon" aria-hidden="true"><i></i><i></i><i></i></span></button></div>
+<div class="sidebar-menu" id="managerSidebarMenu">
 <nav>
 <button class="active" data-view="dashboard">Overview</button>
 <button data-view="pages">Page Editor</button>
@@ -15,7 +16,8 @@
 <button data-view="tools">Site Tools</button>
 <button data-view="health">Health &amp; Backup</button>
 </nav>
-<button class="site-link" id="openSite">Open Live Site ↗</button><button class="site-link reset-demo" id="resetDemo">Reset Preview Demo</button>
+<div class="sidebar-footer-actions"><button class="site-link" id="openSite">Open Live Site ↗</button><button class="site-link reset-demo" id="resetDemo">Reset Preview Demo</button></div>
+</div>
 </aside>
 <main class="workspace">
 <header class="topbar"><div><span class="eyebrow">Website management</span><h1 id="viewTitle">Overview</h1></div><span class="connection-pill" id="connectionPill">Not connected</span></header>
@@ -71,4 +73,4 @@
 <section class="view" id="contactView"><div class="view-head"><div><h2>Contact routing</h2><p>New inquiries are saved in the built-in Requests inbox by default.</p></div></div><form class="panel form-grid" id="settingsForm"><label>Fallback business email<input name="businessEmail" placeholder="projects@company.com" type="email"/><small>Optional. Used to open the visitor's email app only if the online inbox cannot be reached.</small></label><label>External CRM / form endpoint<input name="contactEndpoint" placeholder="https://..."/><small>Leave blank unless the company already uses an outside form/CRM service.</small></label><label class="check full"><input checked="" name="useBuiltIn" type="checkbox"/><span>Use the built-in Requests inbox (recommended)</span></label><div class="brand-actions"><button class="primary" type="submit">Save Contact Settings</button><button id="testContactSetup" type="button">Test Inquiry Setup</button></div><p class="helper-note full" id="contactSetupNote">The built-in inbox stores submissions under Requests. It does not send email notifications by itself.</p></form></section>
 <section class="view" id="toolsView"><div class="view-head"><div><h2>Site Tools</h2><p>Useful site-wide changes. A page backup is made before replacements.</p></div></div><form class="panel form-grid" id="replaceForm"><label>Find this text<input name="find" required=""/></label><label>Replace it with<input name="replace"/></label><label class="check full"><input name="caseSensitive" type="checkbox"/><span>Match capitalization exactly</span></label><button class="primary" type="submit">Replace Across All Pages</button></form></section>
 <section class="view" id="healthView"><div class="view-head"><div><h2>Health &amp; backup</h2><p>Check the live site and download a portable settings/request backup.</p></div><div class="head-actions"><button id="refreshHealth">Run Check</button><button id="downloadBackup">Download Settings Backup</button></div></div><div class="stats" id="healthGrid"></div><div class="panel health-note"><strong>Preview mode</strong><p>Health statistics are simulated for this static GitHub preview. The purchased version runs these checks against the real Node website and stored data.</p></div></section>
-</main></div><script src="preview-api.js?v=26"></script><script src="admin.js?v=26-preview"></script><script src="preview-admin.js?v=26"></script></body></html>
+</main></div><script src="preview-api.js?v=26"></script><script src="admin.js?v=27-preview"></script><script src="preview-admin.js?v=27"></script></body></html>

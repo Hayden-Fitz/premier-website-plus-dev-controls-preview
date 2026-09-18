@@ -29,4 +29,4 @@ Do not upload the real V24/V23 production package to a public repository. It con
 
 
 ## Mobile
-The public preview and Developer Controls are responsive. In Developer Controls, swipe the navigation row left/right on smaller screens to reach every section.
+The public preview and Developer Controls are responsive. On phones, tap **Menu** at the top of Developer Controls to reach every management section.

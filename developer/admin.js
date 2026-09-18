@@ -146,3 +146,22 @@ $('#replaceForm').onsubmit=async e=>{e.preventDefault();const f=e.target,d={find
 async function loadHealth(){try{const d=await api('/api/admin/health');$('#healthGrid').innerHTML=cards([{n:d.pages,l:'HTML pages'},{n:d.requests,l:'Saved requests'},{n:d.brokenLinks,l:'Broken page links'},{n:d.brokenLocalFiles||0,l:'Broken local files'},{n:d.remoteImages||0,l:'Remote images'},{n:d.configured?'Yes':'No',l:'Contact configured'},{n:d.blogPosts,l:'Blog posts'}])}catch(e){status(e.message,true)}}$('#refreshHealth').onclick=loadHealth;$('#downloadBackup').onclick=async()=>{try{const data=await api('/api/admin/backup');const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='premier-settings-backup-'+new Date().toISOString().slice(0,10)+'.json';a.click();URL.revokeObjectURL(a.href);status('Backup downloaded.')}catch(e){status(e.message,true)}};
 
 if(key&&apiBase){api('/api/admin/ping').then(()=>{setOnline(true);status(`Connected to ${apiBase}.`);loadDashboard()}).catch(()=>{setOnline(false);status('Saved connection is offline. Update the URL/key and reconnect.',true)})}
+
+// Mobile Site Manager menu -------------------------------------------------
+(function(){
+  const sidebar=document.getElementById('managerSidebar');
+  const toggle=document.getElementById('managerMenuToggle');
+  if(!sidebar||!toggle)return;
+  const mobile=()=>window.matchMedia('(max-width: 900px)').matches;
+  const setOpen=(open)=>{
+    sidebar.classList.toggle('menu-open',!!open);
+    toggle.setAttribute('aria-expanded',open?'true':'false');
+    toggle.setAttribute('aria-label',open?'Close management menu':'Open management menu');
+  };
+  toggle.addEventListener('click',()=>setOpen(!sidebar.classList.contains('menu-open')));
+  sidebar.querySelectorAll('[data-view]').forEach(btn=>btn.addEventListener('click',()=>{if(mobile())setOpen(false)}));
+  sidebar.querySelectorAll('.site-link').forEach(btn=>btn.addEventListener('click',()=>{if(mobile())setOpen(false)}));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&sidebar.classList.contains('menu-open'))setOpen(false)});
+  document.addEventListener('click',e=>{if(mobile()&&sidebar.classList.contains('menu-open')&&!sidebar.contains(e.target))setOpen(false)});
+  window.addEventListener('resize',()=>{if(!mobile())setOpen(false)});
+})();
